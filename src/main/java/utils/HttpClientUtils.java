@@ -1,7 +1,7 @@
 package utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import models.json.AnalyticsTestsModel;
+import models.analytics.AnalyticsTestsModel;
 import org.apache.http.client.utils.URIBuilder;
 
 import java.io.IOException;

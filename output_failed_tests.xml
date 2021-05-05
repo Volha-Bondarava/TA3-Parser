@@ -1,0 +1,9 @@
+<suite name="Claims Group Benefits Without TS" verbose="1" parallel="tests" thread-count="1024">
+   <listeners/>
+   <parameter name="timeshift-scenario-mode" value="test"/>
+   <test name="CLAIM-GB-AC TestClaimCreateReopen">
+      <classes>
+         <class name="com.exigen.ipb.eisa.modules.claim.groupbenefits.gb_ac.TestClaimCreateReopen"/>
+      </classes>
+   </test>
+</suite>

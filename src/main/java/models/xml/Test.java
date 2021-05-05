@@ -1,7 +1,7 @@
 package models.xml;
 
 import lombok.Data;
-import models.json.TestModel;
+import models.analytics.TestModel;
 import org.simpleframework.xml.*;
 
 import java.util.Collections;

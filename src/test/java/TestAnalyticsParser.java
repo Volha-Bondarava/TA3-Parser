@@ -1,4 +1,4 @@
-import models.json.AnalyticsTestsModel;
+import models.analytics.AnalyticsTestsModel;
 import models.xml.Suite;
 import org.testng.annotations.Test;
 import utils.HttpClientUtils;
