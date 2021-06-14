@@ -19,9 +19,10 @@ public class TestAnalyticsParser {
             return;
         }
 
+        System.out.println(responseResult);
         List<models.xml.Test> failedTests = new ArrayList<>();
         responseResult.getData().forEach(test -> {
-            if (test.getStatus().equals("failed") || test.getStatus().equals("skipped")) {
+            if (test.getStatus().equalsIgnoreCase("failed") || test.getStatus().equalsIgnoreCase("skipped")) {
                 failedTests.add(new models.xml.Test(test));
             }
         });

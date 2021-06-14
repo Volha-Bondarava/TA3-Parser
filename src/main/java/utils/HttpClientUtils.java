@@ -20,6 +20,7 @@ public class HttpClientUtils {
                     .setScheme(PropertyUtils.getPropertyData(PropertyUtils.URL_SCHEME))
                     .setHost(PropertyUtils.getPropertyData(PropertyUtils.URL_HOST))
                     .setPathSegments("api", "runs", PropertyUtils.getPropertyData(PropertyUtils.URL_RUN_ID), "tests")
+                    .setParameter("page[num]", "1").setParameter("page[size]", PropertyUtils.getPropertyData(PropertyUtils.URL_TESTS_LIMIT))
                     .build();
         } catch (URISyntaxException e) {
             e.printStackTrace();
@@ -42,6 +43,7 @@ public class HttpClientUtils {
                     .newBuilder()
                     .build()
                     .send(request, HttpResponse.BodyHandlers.ofByteArray());
+            System.out.println(request);
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }

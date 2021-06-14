@@ -9,6 +9,7 @@ public class PropertyUtils {
     public static final String URL_SCHEME = "url.scheme";
     public static final String URL_HOST = "url.host";
     public static final String URL_RUN_ID = "url.run.id";
+    public static final String URL_TESTS_LIMIT = "url.tests.limit";
 
     public static final String USER_TOKEN = "user.token";
 
