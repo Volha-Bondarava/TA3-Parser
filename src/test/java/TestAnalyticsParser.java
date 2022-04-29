@@ -2,11 +2,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
 import org.testng.annotations.Test;
-import org.testng.log4testng.Logger;
 import models.analytics.AnalyticsTestsModel;
 import models.xml.suite_tag.SuiteTag;
 import models.xml.suite_tag.TestTag;
@@ -14,7 +14,7 @@ import utils.HttpClientUtils;
 import utils.XmlUtils;
 
 public class TestAnalyticsParser {
-    private static final Logger LOG = Logger.getLogger(TestAnalyticsParser.class);
+    private static final Logger LOG = Logger.getLogger(TestAnalyticsParser.class.getSimpleName());
 
     @Test
     public void getFailedTests() {
@@ -30,6 +30,7 @@ public class TestAnalyticsParser {
             return;
         }
 
+        LOG.info("Number of retrieved failed tests is " + responseResult.getData().size());
         Map<String, TestTag> failedTestsMap = new HashMap<>();
         responseResult.getData().forEach(test -> {
             var testTag = test.getTestTag();
