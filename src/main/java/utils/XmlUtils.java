@@ -1,32 +1,34 @@
 package utils;
 
-import models.xml.Suite;
+import models.xml.suite_tag.SuiteTag;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
 import java.io.File;
 
-public class XmlUtils {
+public final class XmlUtils {
 
     private static final Serializer serializer = new Persister();
 
-    public static Suite readInputTestSuite() {
+    private XmlUtils() {}
+
+    public static SuiteTag readInputTestSuite() {
         return readInputTestSuite(PropertyUtils.getPropertyData(PropertyUtils.FILE_INPUT));
     }
 
-    public static Suite readInputTestSuite(String fileInput) {
-        //read source xml
-        File source = new File(fileInput);
-        Suite suite = new Suite();
+    public static SuiteTag readInputTestSuite(String fileInput) {
+        SuiteTag suite = new SuiteTag();
         try {
-            suite = serializer.read(Suite.class, source);
+            //read source xml
+            File source = new File(fileInput);
+            suite = serializer.read(SuiteTag.class, source);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return suite;
     }
 
-    public static void writeTestSuite(Suite suite) {
+    public static void writeTestSuite(SuiteTag suite) {
         File result = new File(PropertyUtils.getPropertyData(PropertyUtils.FILE_OUTPUT));
         try {
             serializer.write(suite, result);

@@ -5,7 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class PropertyUtils {
+public final class PropertyUtils {
     public static final String URL_SCHEME = "url.scheme";
     public static final String URL_HOST = "url.host";
     public static final String URL_RUN_ID = "url.run.id";
@@ -27,6 +27,8 @@ public class PropertyUtils {
             PROPERTIES.setProperty(USER_TOKEN, token);
         }
     }
+
+    private PropertyUtils() {}
 
     public static String getPropertyData(String key) {
         return PROPERTIES.getProperty(key);

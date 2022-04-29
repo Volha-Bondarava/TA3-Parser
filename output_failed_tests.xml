@@ -1,9 +1,94 @@
-<suite name="Claims Group Benefits Without TS" verbose="1" parallel="tests" thread-count="1024">
+<suite>
    <listeners/>
-   <parameter name="timeshift-scenario-mode" value="test"/>
-   <test name="CLAIM-GB-AC TestClaimCreateReopen">
+   <test name="GB-VS CERTIFICATE Cascading Scenarios">
       <classes>
-         <class name="com.exigen.ipb.eisa.modules.claim.groupbenefits.gb_ac.TestClaimCreateReopen"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_vs.certificate.cascading.TestCascadingCancellation"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_vs.certificate.cascading.TestCascadingCancellationCQEffDateMoreThanMPCancelDate"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_vs.certificate.cascading.TestCascadingCancellationNotAffected"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_vs.certificate.cascading.TestCascadingPendingCancellation"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_vs.certificate.cascading.TestRGRFlatCascadingOnPolicy"/>
+      </classes>
+   </test>
+   <test name="GB-CI CERTIFICATE Cascading Scenarios">
+      <classes>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_ci.certificate.cascading.TestCascadingCancellation"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_ci.certificate.cascading.TestCascadingCancellationNotAffected"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_ci.certificate.cascading.TestCascadingCancellationWithCPEffDateLessThanMPCancelDate"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_ci.certificate.cascading.TestCascadingReinstatement"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_ci.certificate.cascading.TestCascadingRescindWithCPCancellationDate"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_ci.certificate.cascading.TestCascadingRescindWithCPEffDate"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_ci.certificate.cascading.TestRGRCascadingWithIssuedEndorsementAndRgr"/>
+      </classes>
+   </test>
+   <test name="GB-STD CERTIFICATE Cascading Scenarios">
+      <classes>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_di_std.certificate.cascading.TestCascadingCancellationCQEffDateMoreThanMPCancelDate"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_di_std.certificate.cascading.TestCascadingCancellationNotAffected"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_di_std.certificate.cascading.TestCascadingCancellationWithCPEffDateLessThanMPCancelDate"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_di_std.certificate.cascading.TestCascadingReinstatement"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_di_std.certificate.cascading.TestCascadingReinstatementAfterManualCancel"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_di_std.certificate.cascading.TestCascadingRescindWithCPCancellationDate"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_di_std.certificate.cascading.TestCascadingRescindWithCPEffDate"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_di_std.certificate.cascading.TestQuoteCascadingOOSEndorsementProcess"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_di_std.certificate.cascading.TestRGRFlatCascadingOnPolicy"/>
+      </classes>
+   </test>
+   <test name="GB-AC CERTIFICATE Cascading Scenarios">
+      <classes>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_ac.certificate.cascading.TestCascadingCancellationWithCPEffDateLessThanMPCancelDate"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_ac.certificate.cascading.TestCascadingPendingCancellation"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_ac.certificate.cascading.TestCascadingReinstatement"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_ac.certificate.cascading.TestCascadingReinstatementAfterManualCancel"/>
+      </classes>
+   </test>
+   <test name="GB-LTD CERTIFICATE Cascading Scenarios">
+      <classes>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_di_ltd.certificate.cascading.TestCascadingCancellation"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_di_ltd.certificate.cascading.TestCascadingCancellationWithCPEffDateLessThanMPCancelDate"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_di_ltd.certificate.cascading.TestCascadingReinstatementAfterManualCancel"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_di_ltd.certificate.cascading.TestQuoteCascadingOOSEndorsementProcess"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_di_ltd.certificate.cascading.TestRGRCascadingWithIssuedEndorsementAndRgr"/>
+      </classes>
+   </test>
+   <test name="GB-ST CERTIFICATE Cascading Scenarios">
+      <classes>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_st.certificate.cascading.TestCascadingReinstatement"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_st.certificate.cascading.TestCascadingRescindWithCPEffDate"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_st.certificate.cascading.TestRGRFlatCascadingOnPolicy"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_st.certificate.cascading.TestRGRlNonFlatCascadingOnPolicy"/>
+      </classes>
+   </test>
+   <test name="GB-HI CERTIFICATE Cascading Scenarios">
+      <classes>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_hi.certificate.cascading.TestCascadingCancellationCQEffDateMoreThanMPCancelDate"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_hi.certificate.cascading.TestCascadingCancellationWithCPEffDateLessThanMPCancelDate"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_hi.certificate.cascading.TestCascadingReinstatement"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_hi.certificate.cascading.TestCascadingReinstatementAfterManualCancel"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_hi.certificate.cascading.TestCascadingRescindWithCPCancellationDate"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_hi.certificate.cascading.TestQuoteCascadingOOSEndorsementProcess"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_hi.certificate.cascading.TestRGRCascadingWithIssuedEndorsementAndRgr"/>
+      </classes>
+   </test>
+   <test name="GB-DN CERTIFICATE Cascading Scenarios">
+      <classes>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_dn.certificate.cascading.TestCascadingReinstatement"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_dn.certificate.cascading.TestCascadingReinstatementAfterManualCancel"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_dn.certificate.cascading.TestCascadingRescindWithCPEffDate"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_dn.certificate.cascading.TestRGRCascadingWithCancellation"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_dn.certificate.cascading.TestRGRCascadingWithIssuedEndorsementAndRgr"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_dn.certificate.cascading.TestRGRFlatCascadingOnPolicy"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_dn.certificate.cascading.TestRGRlNonFlatCascadingOnPolicy"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_dn.certificate.cascading.TestRateGuaranteeRenewalNotAffected"/>
+      </classes>
+   </test>
+   <test name="GB-TL CERTIFICATE Cascading Scenarios">
+      <classes>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_tl.certificate.cascading.TestCascadingCancellation"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_tl.certificate.cascading.TestCascadingCancellationWithCPEffDateLessThanMPCancelDate"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_tl.certificate.cascading.TestCascadingReinstatement"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_tl.certificate.cascading.TestCascadingReinstatementAfterManualCancel"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_tl.certificate.cascading.TestCascadingRescindWithCPEffDate"/>
+         <class name="com.exigen.ipb.eisa.modules.policy.groupbenefits.preconfigured.gb_tl.certificate.cascading.TestRGRFlatCascadingOnPolicy"/>
       </classes>
    </test>
 </suite>

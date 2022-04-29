@@ -6,15 +6,15 @@ import lombok.Data;
 import org.simpleframework.xml.Attribute;
 
 @Data
-public class TestName {
+public class NameValue {
 
     @Attribute
     private String name;
 
-    public TestName() {
+    public NameValue() {
     }
 
-    public TestName(String name) {
+    public NameValue(String name) {
         this.name = name;
     }
 }

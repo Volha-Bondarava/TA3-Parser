@@ -1,29 +1,35 @@
 package utils;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import models.analytics.AnalyticsTestsModel;
-import org.apache.http.client.utils.URIBuilder;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.net.http.HttpResponse.BodyHandlers;
+import java.util.logging.Logger;
+import org.apache.commons.collections4.MultiValuedMap;
+import org.apache.http.client.utils.URIBuilder;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import models.analytics.AnalyticsTestsModel;
 
-public class HttpClientUtils {
+public final class HttpClientUtils {
+    private static final Logger LOG = Logger.getLogger(HttpClientUtils.class.getSimpleName());
 
-    public static AnalyticsTestsModel sendRequest() {
+    private HttpClientUtils() {}
+
+    public static AnalyticsTestsModel getSpecifiedTests(MultiValuedMap<String, String> parameters) {
         URI uri = null;
         try {
-            uri = new URIBuilder()
+            URIBuilder uriBuilder = new URIBuilder()
                     .setScheme(PropertyUtils.getPropertyData(PropertyUtils.URL_SCHEME))
                     .setHost(PropertyUtils.getPropertyData(PropertyUtils.URL_HOST))
                     .setPathSegments("api", "runs", PropertyUtils.getPropertyData(PropertyUtils.URL_RUN_ID), "tests")
-                    .setParameter("page[num]", "1").setParameter("page[size]", PropertyUtils.getPropertyData(PropertyUtils.URL_TESTS_LIMIT))
-                    .build();
+                    .setParameter("page[num]", "1").setParameter("page[size]", PropertyUtils.getPropertyData(PropertyUtils.URL_TESTS_LIMIT));
+            parameters.entries().forEach(entry -> uriBuilder.addParameter(entry.getKey(), entry.getValue()));
+            uri = uriBuilder.build();
         } catch (URISyntaxException e) {
-            e.printStackTrace();
+            LOG.severe(e.getMessage());
         }
 
         HttpRequest httpRequest = HttpRequest.newBuilder()
@@ -42,15 +48,15 @@ public class HttpClientUtils {
             response = HttpClient
                     .newBuilder()
                     .build()
-                    .send(request, HttpResponse.BodyHandlers.ofByteArray());
-            System.out.println(request);
+                    .send(request, BodyHandlers.ofByteArray());
+           LOG.info(request.toString());
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
 
 
         if (response == null) {
-            System.err.println("Response entity is null");
+            LOG.info("Response entity is null");
             return null;
         }
 

@@ -1,41 +1,60 @@
-import models.analytics.AnalyticsTestsModel;
-import models.xml.Suite;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import org.apache.commons.collections4.MultiValuedMap;
+import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
 import org.testng.annotations.Test;
+import org.testng.log4testng.Logger;
+import models.analytics.AnalyticsTestsModel;
+import models.xml.suite_tag.SuiteTag;
+import models.xml.suite_tag.TestTag;
 import utils.HttpClientUtils;
 import utils.XmlUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class TestAnalyticsParser {
+    private static final Logger LOG = Logger.getLogger(TestAnalyticsParser.class);
 
     @Test
     public void getFailedTests() {
-        AnalyticsTestsModel responseResult = HttpClientUtils.sendRequest();
+        MultiValuedMap<String, String> parameters = new ArrayListValuedHashMap<>(3);
+        parameters.put("status", "failed");
+        parameters.put("status", "skipped");
+        parameters.put("failureReason", "unknown");
 
-        if (responseResult == null) {
-            System.err.println("Response from analytics is null");
+        AnalyticsTestsModel responseResult = HttpClientUtils.getSpecifiedTests(parameters);
+
+        if (responseResult.getData().isEmpty()) {
+            LOG.info("Response from analytics is null");
             return;
         }
 
-        System.out.println(responseResult);
-        List<models.xml.Test> failedTests = new ArrayList<>();
+        Map<String, TestTag> failedTestsMap = new HashMap<>();
         responseResult.getData().forEach(test -> {
-            if (test.getStatus().equalsIgnoreCase("failed") || test.getStatus().equalsIgnoreCase("skipped")) {
-                failedTests.add(new models.xml.Test(test));
+            var testTag = test.getTestTag();
+            var t = new TestTag(test);
+            if (failedTestsMap.containsKey(testTag)) {
+                failedTestsMap.get(testTag).getTestClasses().addAll(t.getTestClasses());
+            } else {
+                failedTestsMap.put(testTag, t);
             }
         });
 
-        XmlUtils.writeTestSuite(new Suite(failedTests));
+        XmlUtils.writeTestSuite(new SuiteTag(new ArrayList<>(failedTestsMap.values())));
     }
 
     @Test
     public void getNotExecutedTests() {
-        Suite suiteFromTA = new Suite(HttpClientUtils.sendRequest().getData().stream().map(models.xml.Test::new).collect(Collectors.toList()));
-        Suite suiteFull = XmlUtils.readInputTestSuite();
+        MultiValuedMap<String, String> parameters = new ArrayListValuedHashMap<>(2);
+        parameters.put("status", "failed");
+        parameters.put("failureReason", "unknown");
 
-        List<models.xml.Test> notExecutedTests = new ArrayList<>();
+        SuiteTag suiteFromTA = new SuiteTag(HttpClientUtils.getSpecifiedTests(parameters)
+                .getData().stream().map(TestTag::new).collect(Collectors.toList()));
+        SuiteTag suiteFull = XmlUtils.readInputTestSuite();
+
+        List<TestTag> notExecutedTests = new ArrayList<>();
 
         suiteFull.getTests().forEach(test -> {
             if (!suiteFromTA.getTests().contains(test)) {
